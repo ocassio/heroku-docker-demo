@@ -1,0 +1,11 @@
+language: java
+jdk:
+  - oraclejdk8
+
+services:
+  - docker
+
+after_success:
+  - sudo docker login --username $HEROKU_USERNAME --password $HEROKU_AUTH_TOKEN registry.heroku.com
+  - sudo docker build -t registry.heroku.com/ncedu-docker-demo/web .
+  - sudo docker push registry.heroku.com/ncedu-docker-demo/web
